@@ -53,37 +53,35 @@ describe("utils.test", function () {
 	});
 
 	describe("createResponseHandler", () => {
-		const cb = (error, data) => {
-			return error || data;
-		};
-
 		it(`should handle error`, () => {
 			const error = new Error("test error");
-			const act = utils.createResponseHandler(cb)(error, {}, {});
 
-			expect(act).equal(cb(error));
+			expect(() => utils.handleResponse(error, {}, {})).to.throw(error)
 		});
 
 		it(`should handle 404 response`, () => {
 			const body = { foo: "bar" };
-			const act = utils.createResponseHandler(cb)(
-				null,
-				{
-					statusCode: 404,
-					request: {},
-					response: {},
-					headers: {},
-					data: body,
-				},
-				body,
-				{
-					method: 'GET'
-				}
-			);
-
-			expect(act).to.be.instanceof(utils.FreshdeskError);
-			expect(act.message).equal("The requested entity was not found");
-			expect(act.data).equal(body);
+			try {
+				utils.handleResponse(
+					null,
+					{
+						statusCode: 404,
+						request: {},
+						response: {},
+						headers: {},
+						data: body,
+					},
+					body,
+					{
+						method: 'GET'
+					}
+				);
+				throw new Error('Should fail earlier')
+			} catch (err) {
+				expect(err).to.be.instanceof(utils.FreshdeskError);
+				expect(err.message).equal("The requested entity was not found");
+				expect(err.data).equal(body);
+			}
 		});
 	});
 });

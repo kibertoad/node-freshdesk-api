@@ -52,26 +52,26 @@ declare class Freshdesk {
      * @param {*} page Page number for pagination
      * @param {*} cb
      */
-    filterTickets(query: any, page: any, cb: any): void;
-    listAllTicketFields(params: any, cb: any): void;
-    createTicket(data: any, cb: any): void;
-    getTicket(id: any, cb: any): void;
-    updateTicket(id: any, data: any, cb: any): void;
-    deleteTicket(id: any, cb: any): void;
-    restoreTicket(id: any, cb: any): void;
-    listAllConversations(id: any, cb: any): void;
-    listAllTicketTimeEntries(id: any, cb: any): void;
-    createReply(id: any, data: any, cb: any): void;
-    createNote(id: any, data: any, cb: any): void;
-    updateConversation(id: any, data: any, cb: any): void;
-    deleteConversation(id: any, cb: any): void;
-    createContact(data: any, cb: any): void;
-    getContact(id: any, cb: any): void;
-    listAllContacts(params: any, cb: any): void;
-    updateContact(id: any, data: any, cb: any): void;
-    deleteContact(id: any, cb: any): void;
-    makeAgent(id: any, cb: any): void;
-    listAllContactFields(cb: any): void;
+    filterTickets(query: any, page: any): Promise<any>;
+    listAllTicketFields(params: any): Promise<any>;
+    createTicket(data: any): Promise<any>;
+    getTicket(id: any): Promise<any>;
+    updateTicket(id: any, data: any): Promise<any>;
+    deleteTicket(id: any): Promise<any>;
+    restoreTicket(id: any): Promise<any>;
+    listAllConversations(id: any): Promise<any>;
+    listAllTicketTimeEntries(id: any): Promise<any>;
+    createReply(id: any, data: any): Promise<any>;
+    createNote(id: any, data: any): Promise<any>;
+    updateConversation(id: any, data: any): Promise<any>;
+    deleteConversation(id: any): Promise<any>;
+    createContact(data: any): Promise<any>;
+    getContact(id: any): Promise<any>;
+    listAllContacts(params: any): Promise<any>;
+    updateContact(id: any, data: any): Promise<any>;
+    deleteContact(id: any): Promise<any>;
+    makeAgent(id: any): Promise<any>;
+    listAllContactFields(cb: any): Promise<any>;
     /**
      * Filter Contacts.
      *

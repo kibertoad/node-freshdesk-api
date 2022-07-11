@@ -33,11 +33,10 @@ describe("e2e tests", () => {
 		const freshdesk = new Freshdesk("http://0.0.0.0:9999", "TESTKEY");
 
 		const promise = new Promise((resolve, reject) => {
-			freshdesk.deleteSolutionCategory(3, (err, data) => {
-				expect(err).is.null;
-				expect(data).to.equal(null);
+			return freshdesk.deleteSolutionCategory(3).then ((result) => {
+				expect(result.data).to.equal(null);
 				resolve();
-			});
+			}).catch(reject);
 		});
 		await promise;
 		await app.close();
@@ -59,11 +58,10 @@ describe("e2e tests", () => {
 		const freshdesk = new Freshdesk("http://0.0.0.0:9998", "TESTKEY");
 
 		const promise = new Promise((resolve, reject) => {
-			freshdesk.deleteSolutionCategory(3, (err, data) => {
-				expect(err).is.null;
-				expect(data).to.deep.equal({ status: "ok" });
+			return freshdesk.deleteSolutionCategory(3).then((result) => {
+				expect(result.data).to.deep.equal({ status: "ok" });
 				resolve();
-			});
+			}).catch(reject);
 		});
 		await promise;
 		await app.close();
@@ -142,9 +140,8 @@ describe("e2e tests", () => {
 		const freshdesk = new Freshdesk("http://0.0.0.0:9997", "TESTKEY");
 
 		const promise = new Promise((resolve, reject) => {
-			freshdesk.createTicket(data, (err, data) => {
-				expect(err).is.null;
-				expect(data).to.deep.equal(res);
+			return freshdesk.createTicket(data).then((result) => {
+				expect(result.data).to.deep.equal(res);
 				resolve();
 			});
 		});
